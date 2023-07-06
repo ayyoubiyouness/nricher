@@ -18,5 +18,6 @@ findColor <- function(inputString ) {
 }
 
 
-description <- "Matelas  mousse 140x190 cm"
+description <- "Matelas  rouge mousse 140x190 cm"
 findColor("Matelas  mousse 140x190 cm")
+findColor(description)
