@@ -1,8 +1,12 @@
+library(markdown)
 library(shiny)
+library(ggplot2)
+library(readxl)
+library(ggcorrplot)
+library(tidyverse)
 library(plotly)
 library(highcharter)
 library(shinydashboard)
-library(readxl)
 
 source("C:/Users/Youness/Desktop/R project/nricher/code/global.R")
 
