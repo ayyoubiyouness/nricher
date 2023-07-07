@@ -1,3 +1,10 @@
+library(shiny)
+library(shinydashboard)
+library(highcharter)
+
+
+vendName <- c("Autre vendeur", "Vendeur 1", "Vendeur 2", "Vendeur 3", "Vendeur 4", "Vendeur 5", "Vendeur 6")
+
 ui <- dashboardPage(
   dashboardHeader(title = "Etude de cas Nricher",
                  titleWidth = 330
@@ -45,7 +52,36 @@ ui <- dashboardPage(
           tabItem("subitem13",
                   box(width=12,height="80",
                       p(style="font-size:20px",strong("Youness "),"élève ingénieur en 2A à ECM"),
-                  )
+                  ),
+                  fluidRow(
+                    
+                    
+                    column(12,
+                           
+                           box(selectInput("vendeur",label="Sélectionner le nom du vendeur",choices=vendName),width = 12) 
+                           
+                    ),
+                    column(12,
+                           
+                           box(
+                             
+                             highchartOutput("hcontainer"),
+                             
+                             
+                             
+                             width="12")
+                           
+                    ), 
+                    br(),
+                    column(12,
+                           
+                           box(
+                             highchartOutput("hc2"),width=12
+                             
+                           ) )
+                    
+                  ),
+          
           ),
           tabItem("subitem21",
                   box(width=12,height="80",
@@ -60,4 +96,12 @@ ui <- dashboardPage(
         ),
       )
 )
+
+
+          
+          
+               
+               
+      
+ 
 
