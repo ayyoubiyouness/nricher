@@ -1,3 +1,5 @@
-server <- function(input, output) {
-  }
-shinyApp(ui, server)
+server <- function (input, output, session) {
+  
+}
+
+shinyApp(ui = ui, server = server)
