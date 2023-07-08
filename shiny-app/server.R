@@ -3,7 +3,7 @@ server <- function (input, output, session) {
     
     #if(input$country==inf$region)
     #{
-    df<-datavend %>% filter(Vendeur==input$country)
+    df<-datavend %>% filter(datavend$Vendeur==input$vendeur)
     
     hchart(df, "line",color="#DC270C",hcaes(x=Date,y=Montant))  %>%
       
@@ -31,10 +31,29 @@ server <- function (input, output, session) {
     
   })
   
+  output$vente <- renderPlotly({
+    fig <- plot_ly(quant_matela, labels = ~Vendeur, values = ~Quantité, type = 'pie')
+    fig <- fig %>% layout(title = 'Répartition de la quantité des matelas vendus pour chaque vendeur ',
+                          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+    fig
+  })
+  
+  output$prix <- renderHighchart ({
+    hc <- prix_matela %>%
+      hchart(
+        "pie", hcaes(x = Vendeur, y = prix),
+        name = "Somme"
+      ) %>%
+      hc_title(text = "Répartition des prix matelas vendus pour chaque vendeur")
+    
+    hc
+
+    
+  })
+  
   
 }
   
 
 shinyApp(ui = ui, server = server)
-
-
