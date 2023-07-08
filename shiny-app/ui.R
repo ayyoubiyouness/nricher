@@ -19,7 +19,7 @@ ui <- dashboardPage(
                menuSubItem("Analyse par vendeur", tabName = "subitem13")
                ),
       menuItem("Analse des ventes & prix matelas", icon = icon("dashboard"),
-               menuSubItem("Analuse vente", tabName = "subitem21"),
+               menuSubItem("Analyse vente", tabName = "subitem21"),
                menuSubItem("Analyse prix", tabName = "subitem22")
                )
     )
@@ -86,7 +86,34 @@ ui <- dashboardPage(
           tabItem("subitem21",
                   box(width=12,height="80",
                       p(style="font-size:20px",strong("Youness AYYOUBI"),"élève ingénieur en 2A à ECM"),
-                  )
+                  ),
+                  fluidRow(
+                    
+                    
+                    
+                    column(12,
+                           
+                           box(
+                             
+                             plotlyOutput("vente"),
+                             
+                             
+                             
+                             width="12")
+                           
+                    ), 
+                    br(),
+                    column(12,
+                           
+                           box(
+                             highchartOutput("prix"),width=12
+                             
+                           ) )
+                    
+                  ),
+                  
+                  
+                  
           ),
           tabItem("subitem22",
                   box(width=12,height="80",
@@ -99,9 +126,4 @@ ui <- dashboardPage(
 
 
           
-          
-               
-               
-      
- 
-
+  
