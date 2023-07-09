@@ -1,4 +1,4 @@
-# code pour extraire la couleur dans une chaine 
+# code pour extraire la couleur dans une chaine
 couleurs <- c("rouge", "bleu", "vert", "jaune", "orange", "violet", "rose", "noir", "blanc", "gris", "marron",
               "cyan", "argent", "or", "turquoise", "indigo", "magenta", "bronze", "beige", "olive", "aubergine", "ivoire")
 
@@ -20,11 +20,11 @@ findColor <- function(inputString ) {
 
 
 
-findColor("Matelas rouge   mousse cm")
+findColor("lot de 4 chaise scandinave noires style eiffel")
 
 # code pour determiner la dimension
 findDimension <- function(chaine) {
-  dimension <- regmatches(chaine, regexpr("\\d+\\s*[xX]\\s*\\d+", chaine))
+  dimension <- regmatches(chaine, regexpr("\\d+\\s*[xX*]\\s*\\d+", chaine))
   if (length(dimension) > 0) {
     dimension <- gsub("\\s", "", dimension)  
     return( dimension)
@@ -34,12 +34,11 @@ findDimension <- function(chaine) {
 }
 
 
-chaine <- "Matelas 140x190 mousse  cm"
+chaine <- "pari prix paire de voilage eucaly 70x200cm anthracite"
 
 
 findDimension(chaine)
 
-# code pour extraire la couleur et la dimension dans une chaine 
 ColDim <- function(chaine) {
   a <- findDimension(chaine)
   b <- findColor(chaine)
