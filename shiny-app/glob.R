@@ -207,6 +207,7 @@ for (i in 1:nrow(filtered_datan)) {
 # Ensuite, on refait la catégorisation des produits
 
 nature_unique2 <- as.data.frame(unique(filtered_datan$Nature))
+colnames(nature_unique2) <- c("Nature")
 
 findCategory2 <- function(inputString) {
   inputString <- tolower(inputString)
@@ -214,6 +215,7 @@ findCategory2 <- function(inputString) {
   for (i in 1:nrow(nature_unique2)) {
     category <- tolower(nature_unique2$Nature[i])
     if (str_detect(inputString, paste0("\\b", category, "\\b"))) {
+      #print(i)
       matchedCategory <- nature_unique2$Nature[i]
       break
     }
@@ -221,19 +223,34 @@ findCategory2 <- function(inputString) {
   return(matchedCategory)
 }
 
-
-df_test2 <- data.frame()
+# Maintenant je vois les autres produits que l'algo permet de catégoriser
+df_test3 <- data.frame()
 for (i in 1:nrow(filtered_datan)) {
   
   lib <- filtered_datan$`Libellé produit`[i]
   matchedCategory <- findCategory2(lib)
   category <- filtered_datan$Nature[i]
-  if (!is.na(matchedCategory) && !is.na(category) && matchedCategory != ""   &&  (matchedCategory == category) ) {
+  if (!is.na(matchedCategory) && (matchedCategory == category) ) {
     print(i)
-    df_test2 <- rbind(df_test2, i)
+    df_test3 <- rbind(df_test3, i)
     filtered_datan$Nature[i] <- matchedCategory
   }
   
 }
-colnames(df_test) <- c("indice")
+colnames(df_test3) <- c("indice")
+# je rappelle que 35986 produit que l'algo ne permet pas de catégoriser
+# maintenant je crée deux data : une contient les nouveux produits
+# que l'algo arrive à catégorise
+# l'autre contient les produits que j'arrive pas à catégoriser
+datan1 <- filtered_datan[df_test3$indice, ]
+
+datan2 <- filtered_datan[-df_test3$indice, ]
+
+# la dimension de datan1 est 3038 et la dimension de datan2 est 32948
+# j'arrive à catégoriser 23049 produits. il reste 32948 
+# on oublie datan1 et je travaille sur datan2
+#  on continue le traitement de datan2 avec python 
+library(writexl)
+
+write_xlsx(datan2, "C:/Users/Youness/Desktop/R project/nricher/fichier.xlsx")
 
