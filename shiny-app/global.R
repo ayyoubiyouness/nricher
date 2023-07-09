@@ -67,3 +67,8 @@ data$Nature[ind5] <- "Outil multifonction"
 
 ind6 <- which(data$`Libellé produit` == "1 an supplémentaire d assistance téléphonique PC soit 2 ans d assistance")
 data$Nature[ind6] <- "Pc portable"
+
+
+
+
+
